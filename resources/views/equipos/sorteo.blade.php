@@ -18,7 +18,9 @@
             <span>{{ $matchup[1] }}</span>
         </div>
     @endforeach
+
     <script src="{{ asset('static/js/jquery.bracket.min.js') }}"></script>
+
     <script>
         var torneoData = {!! json_encode($torneoData) !!};
 
