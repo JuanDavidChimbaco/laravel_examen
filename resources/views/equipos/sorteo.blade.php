@@ -7,7 +7,7 @@
     <br>
     <div class="row">
 
-        <div class="tournament-container"></div>
+        <div class="tournament-container d-flex justify-content-center"></div>
 
         @foreach ($torneoData['teams'] as $index => $matchup)
         <div class="matchup">
@@ -42,7 +42,7 @@
             var newValue = $(this).val();
 
             // Actualizar el resultado en la estructura del torneo
-            torneoData.results[matchIndex][0][resultIndex] = parseInt(newValue) || null;
+            torneoData.results[matchIndex][0][resultIndex] = parseInt(newValue);
 
             $('.tournament-container').empty();
                 tournament = $('.tournament-container').bracket({
