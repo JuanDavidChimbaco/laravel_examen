@@ -1,7 +1,7 @@
 @extends('layout\app')
 
 @section('content')
-{{-- <link rel="stylesheet" href="{{ asset('static/css/jquery.bracket.min.css') }}">
+<link rel="stylesheet" href="{{ asset('static/css/jquery.bracket.min.css') }}">
 <div class="container">
         <h2 class="text-center">Enfrentamientos del Sorteo</h2>
     <br>
@@ -50,21 +50,5 @@
     </script>
 
 </div>
-</div> --}}
-
-<link rel="stylesheet" href="{{ asset('static/css/brackets.css') }}">
-<div class="container">
-    <h2 class="text-center">Enfrentamientos del Sorteo</h2>
-    <br>
-    <div class="row">
-        <div class="brackets-container">
-            <!-- Aquí se generará el contenido de los brackets -->
-        </div>
-    </div>
 </div>
-
-<script>
-    var rounds = {!! json_encode($rounds) !!};
-</script>
-<script src="{{ asset('static/js/brackets.js') }}"></script>
 @endsection

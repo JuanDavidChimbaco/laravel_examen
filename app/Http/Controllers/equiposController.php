@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\equipos;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
 
@@ -57,77 +56,31 @@ class equiposController extends Controller
     return redirect()->route('equipos.index')->with('success', 'Equipo registrado con éxito.');
     }
 
-    // public function sorteo()
-    // {
-
-    // $equipos = equipos::inRandomOrder()->limit(8)->get();
-
-    // // Divide los equipos en pares para los enfrentamientos
-    // $enfrentamientos = [];
-    // for ($i = 0; $i < 8; $i += 2) {
-    //     $enfrentamientos[] = ['equipo1' => $equipos[$i], 'equipo2' => $equipos[$i + 1]];
-    // }
-
-    // // Prepara la estructura de datos para el script del torneo
-    // $teams = [];
-    // $results = [];
-
-    // foreach ($enfrentamientos as $enfrentamiento) {
-    //     $teams[] = [$enfrentamiento['equipo1']->nombre, $enfrentamiento['equipo2']->nombre];
-    //     $results[] = [ [null, null] ]; // Agrega un nuevo resultado para cada enfrentamiento
-    // }
-
-    // $torneoData = [
-    //     'teams' => $teams,
-    //     'results' => $results,
-    // ];
-
-    // return view('equipos.sorteo', compact('torneoData'));
-    // }
-
     public function sorteo()
     {
-        // Obtén los equipos registrados
-        $equipos = equipos::inRandomOrder()->limit(8)->get();
 
-        // Divide los equipos en pares para los enfrentamientos
-        $enfrentamientos = $this->generarEnfrentamientos($equipos);
+    $equipos = equipos::inRandomOrder()->limit(8)->get();
 
-        // Prepara los datos para la vista
-        $rounds = $this->prepararRondas($enfrentamientos);
-
-        return view('equipos.sorteo', compact('rounds'));
+    // Divide los equipos en pares para los enfrentamientos
+    $enfrentamientos = [];
+    for ($i = 0; $i < 8; $i += 2) {
+        $enfrentamientos[] = ['equipo1' => $equipos[$i], 'equipo2' => $equipos[$i + 1]];
     }
 
-    // Función para generar los enfrentamientos
-    private function generarEnfrentamientos(Collection $equipos)
-    {
-        $enfrentamientos = [];
+    // Prepara la estructura de datos para el script del torneo
+    $teams = [];
+    $results = [];
 
-        for ($i = 0; $i < count($equipos); $i += 2) {
-            $enfrentamientos[] = [
-                'equipo1' => $equipos[$i],
-                'equipo2' => $equipos[$i + 1]
-            ];
-        }
-
-        return $enfrentamientos;
+    foreach ($enfrentamientos as $enfrentamiento) {
+        $teams[] = [$enfrentamiento['equipo1']->nombre, $enfrentamiento['equipo2']->nombre];
+        $results[] = [ [null, null] ]; // Agrega un nuevo resultado para cada enfrentamiento
     }
 
-    // Función para preparar los datos de las rondas
-    private function prepararRondas(array $enfrentamientos)
-    {
-        $rounds = [];
+    $torneoData = [
+        'teams' => $teams,
+        'results' => $results,
+    ];
 
-        foreach ($enfrentamientos as $enfrentamiento) {
-            $rounds[] = [
-                [
-                    'team1' => $enfrentamiento['equipo1']->nombre,
-                    'team2' => $enfrentamiento['equipo2']->nombre
-                ]
-            ];
-        }
-
-        return $rounds;
+    return view('equipos.sorteo', compact('torneoData'));
     }
 }
