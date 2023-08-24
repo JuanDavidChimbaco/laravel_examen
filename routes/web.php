@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route :: resource('equipos', 'App\Http\Controllers\equiposController');
+
+Route::get('/equipos', 'App\Http\Controllers\equiposController@index')->name('equipos.index');
+Route::post('/equipos', 'App\Http\Controllers\equiposController@store')->name('equipos.store');
+Route::get('/sorteo', 'App\Http\Controllers\equiposController@sorteo')->name('equipos.sorteo');

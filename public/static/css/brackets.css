@@ -1,0 +1,25 @@
+/* Estilos para el sistema de brackets */
+.brackets-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.round {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.matchup {
+    width: 200px;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.matchup:hover {
+    background-color: #f0f0f0;
+}
